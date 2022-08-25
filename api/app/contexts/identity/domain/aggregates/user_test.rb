@@ -1,6 +1,6 @@
 require "test/unit"
 require_relative "./user"
-require_relative "./email"
+require_relative "../../../shared/email"
 
 class UserTest < Test::Unit::TestCase
   test "should user email successfully with existent id" do
