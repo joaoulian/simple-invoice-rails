@@ -1,23 +1,27 @@
 require 'securerandom'
 
-class User
-  def initialize(email, id)
-    @email = email
-    @id = id
-  end
+module Domain
+  module Identity
+    class User
+      def initialize(email, id)
+        @email = email
+        @id = id
+      end
 
-  def email
-    @email
-  end
+      def email
+        @email
+      end
 
-  def id
-    @id
-  end
+      def id
+        @id
+      end
 
-  private_class_method :new
+      private_class_method :new
 
-  def self.create(email, id = SecureRandom.uuid)
-    instance = new(email, id)
-    return instance
+      def self.create(email, id = SecureRandom.uuid)
+        instance = new(email, id)
+        return instance
+      end
+    end
   end
 end

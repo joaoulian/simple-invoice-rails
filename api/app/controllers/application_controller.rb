@@ -7,10 +7,6 @@ module Shared
 
         render json: { error: 'Unexpected Error' }, status: :internal_server_error
       end
-
-      rescue_from Exceptions::BusinessException do |e|
-        render json: { error: e.message }, status: :bad_request
-      end
     end
   end
 end
