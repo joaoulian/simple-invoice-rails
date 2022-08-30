@@ -3,8 +3,8 @@ require_relative '../application_controller'
 
 class Api::AuthController < ApplicationController
   def generate_token
-    response = Application::User::GenerateToken.new.execute(auth_params[:email])
-    render json: { token: response.token, exp: response.exp }, status: :ok
+    token = Application::User::GenerateToken.new.execute(auth_params[:email])
+    render json: { token: token }, status: :ok
   end
 
   private

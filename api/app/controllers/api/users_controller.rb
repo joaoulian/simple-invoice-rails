@@ -11,8 +11,8 @@ class Api::UsersController < ApplicationController
   end
 
   def create
-    id = Application::User::CreateUser.new.execute(user_params[:email])
-    render json: { success: true, id: id }, status: :ok
+    Application::User::CreateUser.new.execute(user_params[:email])
+    render json: { success: true }, status: :ok
   end
 
   private

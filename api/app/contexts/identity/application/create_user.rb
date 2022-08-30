@@ -15,7 +15,9 @@ module Application
 
         @user_repository.save(user)
 
-        return user.id
+        token = TokenHelper.instance.generate_token(user.id)
+
+        return token
       end
     end
   end

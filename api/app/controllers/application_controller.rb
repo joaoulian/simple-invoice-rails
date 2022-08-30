@@ -1,5 +1,4 @@
-require "./app/contexts/identity/infrastructure/jwt_helper"
-require "jwt"
+require "./app/contexts/identity/infrastructure/token_helper"
 
 class ApplicationController < ActionController::API
   rescue_from Exception do |e|
@@ -17,8 +16,8 @@ class ApplicationController < ActionController::API
     header = request.headers['Authorization']
     header = header.split(' ').last if header
     begin
-      @decoded = JsonWebTokenHelper.decode(header)
-      @current_user = Infrastructure::Identity::User.find_by(id: @decoded[:user_id])
+      user_id = TokenHelper.instance.get_user_id_from_token(header)
+      @current_user = Infrastructure::Identity::User.find_by(id: user_id)
     rescue ActiveRecord::RecordNotFound => e
       render json: { errors: e.message }, status: :unauthorized
     rescue JWT::DecodeError => e

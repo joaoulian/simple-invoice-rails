@@ -1,4 +1,5 @@
 require_relative "../infrastructure/user_repository"
+require_relative "../infrastructure/token_helper"
 
 module Application
   module User
