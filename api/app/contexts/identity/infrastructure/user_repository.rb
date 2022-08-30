@@ -21,6 +21,11 @@ module Infra
         user = @user.find_by(id: id)
         return @mapper.toDomain(user)
       end
+
+      def find_by_email(email)
+        user = @user.find_by(email: email)
+        return @mapper.toDomain(user)
+      end
     end
   end
 end

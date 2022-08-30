@@ -3,8 +3,10 @@ require_relative "../../contexts/identity/application/create_user"
 require_relative '../application_controller'
 
 class Api::UsersController < ApplicationController
+  before_action :authorize_request, except: :create
+
   def show
-    user = Application::User::FindUserById.new.execute(request.headers["token"])
+    user = Application::User::FindUserById.new.execute(@current_user.id)
     render json: user, status: :ok
   end
 
