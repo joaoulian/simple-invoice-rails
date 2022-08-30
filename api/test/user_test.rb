@@ -5,7 +5,7 @@ require_relative '../app/contexts/identity/domain/aggregates/user'
 module Domain
   module Identity
     class UserTest < ActiveSupport::TestCase
-      test "should user email successfully with existent id" do
+      test "should create user successfully with existent id" do
         email = Email.create("joao@gmail.com")
         id = "unique-id"
 
@@ -15,7 +15,7 @@ module Domain
         assert(user.id, id)
       end
 
-      test "should user email successfully" do
+      test "should create user successfully" do
         email = Email.create("joao@gmail.com")
 
         user = Domain::Identity::User.create(email)
@@ -24,7 +24,7 @@ module Domain
         assert_not_nil(user.id)
       end
 
-      test "should raise error if email is not a email value object" do
+      test "should raise error if user email is not a email value object" do
         email = "joao@gmail.com"
 
         assert_raise RuntimeError do
