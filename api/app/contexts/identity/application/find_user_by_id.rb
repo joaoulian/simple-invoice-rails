@@ -3,11 +3,11 @@ require_relative "../infrastructure/user_repository"
 module Application
   module User
     class FindUserById
-      def initialize(repositories = {})
-        @user_repository = Infra::Repositories::UserRepository.new
+      def initialize()
+        @user_repository = Infra::Repositories::UserRepository.instance
       end
 
-      def find_by_id(id)
+      def execute(id)
         @user_repository.find_by_id(id)
       end
     end

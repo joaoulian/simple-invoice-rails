@@ -5,6 +5,8 @@ require_relative './user_mapper'
 module Infra
   module Repositories
     class UserRepository < Domain::Identity::UserRepository
+      include Singleton
+      
       def initialize()
         @user = Infrastructure::Identity::User
         @mapper = Infra::Repositories::UserRepositoryMapper.new

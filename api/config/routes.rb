@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   namespace :api do
-    resources :users, only: [:show]
+    get 'me', to: 'users#show'
+    post 'users', to: 'users#create'
   end
 end
