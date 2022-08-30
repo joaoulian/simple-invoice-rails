@@ -1,7 +1,7 @@
 module Domain
   module Identity
     class UserRepository
-      def save(order)
+      def save(user)
         raise "Not implemented yet"
       end
 
