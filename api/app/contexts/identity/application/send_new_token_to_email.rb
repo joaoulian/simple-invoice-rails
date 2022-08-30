@@ -3,7 +3,7 @@ require_relative "../infrastructure/token_helper"
 
 module Application
   module User
-    class GenerateToken
+    class SendNewTokenToEmail
       def initialize()
         @user_repository = Infra::Repositories::UserRepository.instance
       end
@@ -13,7 +13,6 @@ module Application
         token = TokenHelper.instance.generate_token(user.id)
 
         IdentityMailer.send_token(user.email.value, token).deliver_later
-        return token
       end
     end
   end

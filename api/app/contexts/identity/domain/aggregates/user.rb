@@ -1,4 +1,5 @@
 require 'securerandom'
+require_relative '../../../../shared/domain/email'
 
 module Domain
   module Identity
@@ -19,7 +20,7 @@ module Domain
       private_class_method :new
 
       def self.create(email, id = SecureRandom.uuid)
-        raise 'bad argument' unless email.instance_of? Domain::Identity::Email
+        raise 'bad argument' unless email.instance_of? Email
         
         instance = new(email, id)
         return instance

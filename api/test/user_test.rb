@@ -1,5 +1,5 @@
 require 'test_helper'
-require_relative '../app/contexts/identity/domain/aggregates/email'
+require_relative '../app/shared/domain/email'
 require_relative '../app/contexts/identity/domain/aggregates/user'
 
 module Domain
@@ -9,7 +9,7 @@ module Domain
         email = Email.create("joao@gmail.com")
         id = "unique-id"
 
-        user = User.create(email, id)
+        user = Domain::Identity::User.create(email, id)
 
         assert(user.email.value, email.value)
         assert(user.id, id)
@@ -18,7 +18,7 @@ module Domain
       test "should user email successfully" do
         email = Email.create("joao@gmail.com")
 
-        user = User.create(email)
+        user = Domain::Identity::User.create(email)
 
         assert(user.email.value, email.value)
         assert_not_nil(user.id)
@@ -28,7 +28,7 @@ module Domain
         email = "joao@gmail.com"
 
         assert_raise RuntimeError do
-          user = User.create(email)
+          user = Domain::Identity::User.create(email)
         end
       end
     end

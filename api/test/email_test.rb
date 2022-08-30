@@ -1,12 +1,12 @@
 require 'test_helper'
-require_relative '../app/contexts/identity/domain/aggregates/email'
+require_relative '../app/shared/domain/email'
 
 
 class EmailTest < ActiveSupport::TestCase
   test "should create email successfully" do
     input = "joao@gmail.com"
 
-    email = Domain::Identity::Email.create(input)
+    email = Email.create(input)
     
     assert(email.value, input)
   end
@@ -15,7 +15,7 @@ class EmailTest < ActiveSupport::TestCase
     input = "joao"
 
     assert_raise RuntimeError do
-      email = Domain::Identity::Email.create(input)
+      email = Email.create(input)
     end
     
   end
@@ -24,7 +24,7 @@ class EmailTest < ActiveSupport::TestCase
     input = ""
 
     assert_raise RuntimeError do
-      email = Domain::Identity::Email.create(input)
+      email = Email.create(input)
     end
     
   end

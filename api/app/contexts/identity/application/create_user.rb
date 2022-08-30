@@ -1,5 +1,5 @@
 require_relative "../infrastructure/user_repository"
-require_relative "../domain/aggregates/email"
+require_relative "../../../shared/domain/email"
 require_relative "../domain/aggregates/user"
 
 module Application
@@ -10,7 +10,7 @@ module Application
       end
 
       def execute(emailDto)
-        email = Domain::Identity::Email.create(emailDto)
+        email = Email.create(emailDto)
         user = Domain::Identity::User.create(email)
 
         @user_repository.save(user)
