@@ -17,6 +17,8 @@ module Application
 
         token = TokenHelper.instance.generate_token(user.id)
 
+        IdentityMailer.send_token(email.value, token).deliver_later
+
         return token
       end
     end

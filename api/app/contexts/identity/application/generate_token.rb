@@ -11,6 +11,8 @@ module Application
       def execute(email)
         user = @user_repository.find_by_email(email)
         token = TokenHelper.instance.generate_token(user.id)
+
+        IdentityMailer.send_token(user.email.value, token).deliver_later
         return token
       end
     end
