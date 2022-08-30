@@ -23,6 +23,14 @@ module Domain
         assert(user.email.value, email.value)
         assert_not_nil(user.id)
       end
+
+      test "should raise error if email is not a email value object" do
+        email = "joao@gmail.com"
+
+        assert_raise RuntimeError do
+          user = User.create(email)
+        end
+      end
     end
   end
 end

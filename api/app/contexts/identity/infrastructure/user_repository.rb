@@ -1,16 +1,23 @@
+require_relative './user_model'
+require_relative '../domain/repositories/user_repository'
+require_relative './user_mapper'
+
 module Infra
   module Repositories
-    class OrderRepository < Domain::Identity::UserRepository
-      def initialize(model = {})
-        @user = model.fetch(:user) { Infrastructure::Identity::User }
+    class UserRepository < Domain::Identity::UserRepository
+      def initialize()
+        @user = Infrastructure::Identity::User
+        @mapper = Infra::Repositories::UserRepositoryMapper.new
       end
 
-      def save(user)
+      def save(domain)
+        user = @mapper.toPersistance(domain)
         user.save
       end
 
       def find_by_id(id)
-        @user.find_by(id: id)
+        user = @user.find_by(id: id)
+        return @mapper.toDomain(user)
       end
     end
   end
