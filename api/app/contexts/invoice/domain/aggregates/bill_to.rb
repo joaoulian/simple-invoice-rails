@@ -12,6 +12,10 @@ class BillTo
     @info
   end
 
+  def get_emails_list
+    return @emails.map { |email| email.value }
+  end
+
   private_class_method :new
 
   def self.create(info, emails)

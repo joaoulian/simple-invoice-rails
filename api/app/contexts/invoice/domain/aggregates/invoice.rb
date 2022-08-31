@@ -3,11 +3,12 @@ require_relative './bill_to'
 
 module Domain
   class Invoice
-    def initialize(date, company_data, bill_to, total, id)
+    def initialize(date, company_info, bill_to, total, user_id, id)
       @date = date
-      @company_data = company_data
+      @company_info = company_info
       @bill_to = bill_to
       @total = total
+      @user_id = user_id
       @id = id
     end
 
@@ -15,8 +16,8 @@ module Domain
       @date
     end
 
-    def company_data
-      @company_data
+    def company_info
+      @company_info
     end
 
     def bill_to
@@ -33,10 +34,10 @@ module Domain
 
     private_class_method :new
 
-    def self.create(date, company_data, bill_to, total, id =SecureRandom.uuid)
+    def self.create(date, company_info, bill_to, total, user_id, id =SecureRandom.uuid)
       raise 'Invalid bill to' unless bill_to.instance_of? BillTo
       raise 'Invalid date' unless date.instance_of? Date
-      instance = new(date, company_data, bill_to, total, id)
+      instance = new(date, company_info, bill_to, total, user_id, id)
       return instance
     end
   end

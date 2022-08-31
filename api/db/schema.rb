@@ -10,9 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_26_150204) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_30_201518) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "invoices", force: :cascade do |t|
+    t.string "invoice_number"
+    t.date "invoice_date"
+    t.string "company_data"
+    t.float "total"
+    t.text "billing_info"
+    t.string "billing_emails", array: true
+    t.uuid "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_invoices_on_user_id"
+  end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", null: false
@@ -21,4 +34,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_26_150204) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "invoices", "users"
 end
