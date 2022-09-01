@@ -14,14 +14,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_30_201518) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "invoices", force: :cascade do |t|
-    t.string "invoice_number"
-    t.date "invoice_date"
-    t.string "company_data"
-    t.float "total"
-    t.text "billing_info"
-    t.string "billing_emails", array: true
-    t.uuid "user_id"
+  create_table "invoices", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.date "invoice_date", null: false
+    t.string "company_info", null: false
+    t.float "total", null: false
+    t.text "billing_info", null: false
+    t.string "billing_emails", null: false, array: true
+    t.uuid "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_invoices_on_user_id"

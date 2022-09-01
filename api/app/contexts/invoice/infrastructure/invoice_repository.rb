@@ -1,6 +1,6 @@
 require_relative './invoice_model'
-require_relative '../domain/repositories/user_repository'
-require_relative './user_mapper'
+require_relative '../domain/repositories/invoice_repository'
+require_relative './invoice_mapper'
 
 module Infra
   module Repositories
@@ -9,7 +9,7 @@ module Infra
       
       def initialize()
         @invoice = Infrastructure::Invoice
-        @mapper = Infra::Repositories::UserRepositoryMapper.new
+        @mapper = Infra::Repositories::InvoiceRepositoryMapper.new
       end
 
       def save(domain)

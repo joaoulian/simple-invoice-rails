@@ -32,6 +32,10 @@ module Domain
       @id
     end
 
+    def user_id
+      @user_id
+    end
+
     private_class_method :new
 
     def self.create(date, company_info, bill_to, total, user_id, id =SecureRandom.uuid)
