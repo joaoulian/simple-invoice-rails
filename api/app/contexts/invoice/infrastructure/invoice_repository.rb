@@ -23,9 +23,14 @@ module Infra
       end
 
       def find_by_date(date)
-        invoice = @invoice.where(
+        invoices = @invoice.where(
           :invoice_date => date.beginning_of_day..date.end_of_day)
-        return @mapper.toDomain(invoice)
+        return invoices.map { |invoice| @mapper.toDomain(invoice) }
+      end
+
+      def get_invoices_by_user_id(user_id)
+        invoices = @invoice.where(user_id: user_id)
+        return invoices.map { |invoice| @mapper.toDomain(invoice) }
       end
     end
   end
