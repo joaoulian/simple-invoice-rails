@@ -54,7 +54,7 @@ Rails.application.configure do
   config.active_record.verbose_query_logs = true
 
   config.action_mailer.delivery_method = :smtp
-  host = 'localhost:3000' #replace with your own url
+  host = 'localhost:5000' #replace with your own url
   config.action_mailer.default_url_options = { host: host }
 
   # SMTP settings for gmail
