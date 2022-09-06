@@ -24,6 +24,21 @@ class AuthService {
       }
     }
   }
+
+  public async signup(email: string): Promise<any> {
+    try {
+      const { data } = await this.instance.post(`/users`, {
+        email,
+      })
+      return data
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        return new APIError(err.message)
+      } else {
+        return new APIError('An unexpected error occurred')
+      }
+    }
+  }
 }
 
 export const authService = new AuthService()

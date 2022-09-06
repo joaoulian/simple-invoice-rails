@@ -9,8 +9,12 @@ module Application
       end
 
       def execute(id)
-        @user_repository.find_by_id(id)
+        user = @user_repository.find_by_id(id)
+        return UserDTO.new(user.email.value, user.id)
       end
     end
+
+    UserDTO = Struct.new(:email, :id)
+
   end
 end
