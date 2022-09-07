@@ -12,7 +12,7 @@ module Application
       def execute(id, actor_id)
         invoice = @invoice_repository.find_by_id(id)
 
-        rails 'Forbidden' unless invoice.user_id == actor_id
+        raise 'Forbidden' unless invoice.user_id == actor_id
 
         return invoice
       end

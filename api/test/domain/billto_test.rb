@@ -1,6 +1,6 @@
 require 'test_helper'
-require_relative '../app/shared/domain/email'
-require_relative '../app/contexts/invoice/domain/aggregates/bill_to'
+require_relative '../../app/shared/domain/email'
+require_relative '../../app/contexts/invoice/domain/aggregates/bill_to'
 
 module Domain
   module Identity

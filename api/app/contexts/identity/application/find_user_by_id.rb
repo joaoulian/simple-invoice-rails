@@ -8,8 +8,10 @@ module Application
         @user_repository = Infra::Repositories::UserRepository.instance
       end
 
-      def execute(id)
+      def execute(id, actor_id)
         user = @user_repository.find_by_id(id)
+        raise 'Forbidden' unless user.id == actor_id
+
         return UserDTO.new(user.email.value, user.id)
       end
     end

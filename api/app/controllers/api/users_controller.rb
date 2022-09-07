@@ -6,7 +6,7 @@ class Api::UsersController < ApplicationController
   before_action :authorize_request, except: :create
 
   def show
-    user = Application::User::FindUserById.new.execute(@current_user.id)
+    user = Application::User::FindUserById.new.execute(@current_user.id, @current_user.id)
     render json: user, status: :ok
   end
 

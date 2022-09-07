@@ -12,7 +12,7 @@ module Application
 
       def execute(invoice_id, dto_emails, actor_id)
         invoice = @invoice_repository.find_by_id(invoice_id)
-        rails 'Forbidden' unless invoice.user_id == actor_id
+        raise 'Forbidden' unless invoice.user_id == actor_id
 
         emails = dto_emails.map { |email| Email.create(email) }
 

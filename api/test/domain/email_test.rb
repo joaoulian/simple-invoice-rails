@@ -1,5 +1,5 @@
 require 'test_helper'
-require_relative '../app/shared/domain/email'
+require_relative '../../app/shared/domain/email'
 
 
 class EmailTest < ActiveSupport::TestCase
