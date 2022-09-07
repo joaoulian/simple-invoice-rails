@@ -32,7 +32,7 @@ class Api::InvoiceController < ApplicationController
 
   def download_invoice
     invoice = Application::Invoice::GetInvoice.new.execute(params[:id], @current_user.id)
-    invoice_pdf = InvoicePdf.new(invoice.as_json)
+    invoice_pdf = InvoicePdf.new(invoice)
     invoice_pdf.header
 
     send_data invoice_pdf.render,

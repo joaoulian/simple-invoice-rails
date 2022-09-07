@@ -17,7 +17,9 @@ module Application
 
         @invoice_repository.save(invoice, emails)
 
-        InvoiceMailer.send_invoice(invoice.as_json, emails.as_json).deliver_later
+        invoice_pdf = InvoicePdf.new(invoice)
+        invoice_pdf.header
+        InvoiceMailer.send_invoice(invoice_pdf.render, emails.map { |email| email.value }, invoice.id).deliver_later
       end
     end
 

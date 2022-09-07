@@ -5,6 +5,7 @@ class InvoicePdf
 
   def initialize(invoice)
     @invoice = invoice
+    puts @invoice
   end
   
   def header

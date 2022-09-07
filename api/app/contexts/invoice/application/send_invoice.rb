@@ -1,6 +1,7 @@
 require_relative "../infrastructure/invoice_repository"
 require_relative "../../../shared/domain/email"
 require_relative "../domain/aggregates/invoice"
+require_relative "./invoice_pdf"
 
 module Application
   module Invoice
@@ -15,7 +16,10 @@ module Application
 
         emails = dto_emails.map { |email| Email.create(email) }
 
-        InvoiceMailer.send_invoice(invoice, emails).deliver_later
+        invoice_pdf = InvoicePdf.new(invoice)
+        invoice_pdf.header
+        InvoiceMailer.send_invoice(invoice_pdf.render, emails.map { |email| email.value }, invoice.id).deliver_later
+        
       end
     end
   end
