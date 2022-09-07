@@ -1,5 +1,8 @@
 require_relative "../../contexts/invoice/application/create_invoice"
 require_relative "../../contexts/invoice/application/get_invoices"
+require_relative "../../contexts/invoice/application/get_invoice"
+require_relative "../../contexts/invoice/application/invoice_pdf"
+require_relative "../../contexts/invoice/application/send_invoice"
 require_relative '../application_controller'
 require 'json'
 
@@ -27,6 +30,21 @@ class Api::InvoiceController < ApplicationController
     render json: { data: invoices }, status: :ok
   end
 
+  def download_invoice
+    invoice = Application::Invoice::GetInvoice.new.execute(params[:id], @current_user.id)
+    invoice_pdf = InvoicePdf.new(invoice.as_json)
+    invoice_pdf.header
+
+    send_data invoice_pdf.render,
+              filename: "invoice.pdf",
+              type: "application/pdf"
+  end
+
+  def send_invoice
+    Application::Invoice::SendInvoice.new.execute(send_invoice_params[:id], send_invoice_params[:emails], @current_user.id)
+    render json: { success: true}, status: :ok
+  end
+
   private
     def invoice_params
       params.permit([
@@ -35,6 +53,13 @@ class Api::InvoiceController < ApplicationController
         :company_info,
         :total,
         :billing_emails => []
+      ])
+    end
+
+    def send_invoice_params
+      params.permit([
+        :id,
+        :emails => []
       ])
     end
 end

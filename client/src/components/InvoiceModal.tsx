@@ -11,13 +11,13 @@ export const InvoiceModal = (props: RoleDialogProps) => {
   const [currentEmail, setCurrentEmail] = useState<string>('');
 
   const onSave = () => {
-    console.log({
-      companyInfo,
+    props.onSave({
       billTo,
-      total,
-      date,
+      companyInfo,
+      date: new Date(date),
       emails,
-    });
+      total: Number.parseFloat(total)
+    })
   }
 
   const renderCompanyInfo = () => {
@@ -161,4 +161,13 @@ export const InvoiceModal = (props: RoleDialogProps) => {
 interface RoleDialogProps {
   open: boolean;
   closeDialog: () => void;
+  onSave(invoice: ModalInvoice): void;
+}
+
+export interface ModalInvoice {
+  companyInfo: string;
+  billTo: string;
+  emails: string[];
+  date: Date;
+  total: number;
 }

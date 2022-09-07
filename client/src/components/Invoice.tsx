@@ -1,4 +1,4 @@
-export const Invoice = ({ invoice }: InvoiceProps) => {
+export const Invoice = ({ invoice, download, sendToEmail }: InvoiceProps) => {
   return (
     <>
 
@@ -17,11 +17,14 @@ export const Invoice = ({ invoice }: InvoiceProps) => {
         </p>
         <p className="text-base p-6 font-medium">Total<p className="text-sm">{invoice.total}</p></p>
       </div>
-      <div className="flex justify-between">
+      <div className="flex justify-between mb-4">
         <div className="flex items-end justify-end space-x-3">
-          <button className="px-4 py-2 text-sm text-green-600 bg-green-100">Print</button>
-          <button className="px-4 py-2 text-sm text-blue-600 bg-blue-100">Save</button>
-          <button className="px-4 py-2 text-sm text-red-600 bg-red-100">Cancel</button>
+          <button className="px-4 py-2 btn" onClick={() => download(invoice.id)}>Download</button>
+        </div>
+      </div>
+      <div className="flex justify-between mb-4">
+        <div className="flex items-end justify-end space-x-3">
+          <button className="px-4 py-2 btn" onClick={() => sendToEmail(invoice.id)}>Enviar por e-mail</button>
         </div>
       </div>
 
@@ -43,4 +46,6 @@ export interface Invoice {
 
 export interface InvoiceProps {
   invoice: Invoice
+  download: (id: string) => void
+  sendToEmail: (id: string) => void
 }

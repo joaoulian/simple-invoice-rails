@@ -1,18 +1,21 @@
 require "prawn"
 
-class InvoicePdf < Prawn::Document
-  def initialize
-    # Default state of the pdf would state to this code
-    super
-    # Uncomment the below line if you wish for some custom rearrangements in the default state. like for ex
-    # super(top_margin: 100)  
+class InvoicePdf
+  include Prawn::View
+
+  def initialize(invoice)
+    @invoice = invoice
   end
   
-  # Now start defining methods and perform operations for your PDF.
   def header
-    move_down 30  # This will move down the start of pdf by 30 pixels.
-    text "My Header" , :style => :bold , :size => 14 # obviously, the size and style can be customized.
-    text "#{Date.today}" , :style => :bold , :size => 5 # You can use Interpolation and rails as is, obviously.
+    move_down 30
+    text "Invoice #{@invoice.id}" , :style => :bold , :size => 14
+    text "Company: #{@invoice.company_info}" , :size => 12
+    text "Bill to: #{@invoice.bill_to.info}" , :size => 12
+    text "Total: #{@invoice.total}" , :size => 12
+    text "Invoice date: #{@invoice.date}" , :size => 12
+    move_down 30
+    text "generated #{Date.today}" , :size => 8
   end
 
 end

@@ -10,5 +10,7 @@ Rails.application.routes.draw do
     # invoice
     post 'invoice', to: 'invoice#create'
     get 'invoice', to: 'invoice#get_invoices'
+    post 'send_invoice', to: 'invoice#send_invoice'
+    get 'download_invoice', to: 'invoice#download_invoice'
   end
 end

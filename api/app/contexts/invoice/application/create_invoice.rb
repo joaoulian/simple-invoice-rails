@@ -15,9 +15,9 @@ module Application
 
         invoice = Domain::Invoice.create(dto.invoice_date, dto.company_info, bill_to, dto.total, dto.user_id)
 
-        @invoice_repository.save(invoice)
+        @invoice_repository.save(invoice, emails)
 
-        InvoiceMailer.send_invoice(invoice.as_json).deliver_later
+        InvoiceMailer.send_invoice(invoice.as_json, emails.as_json).deliver_later
       end
     end
 
