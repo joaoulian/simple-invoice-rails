@@ -64,11 +64,9 @@ export class InvoiceService {
       return data
     } catch (err) {
       if (axios.isAxiosError(err)) {
-        console.log('error message: ', err.message)
-        throw new APIError(err.message)
+        return new APIError(err.message)
       } else {
-        console.log('unexpected error: ', err)
-        throw new APIError('An unexpected error occurred')
+        return new APIError('An unexpected error occurred')
       }
     }
   }

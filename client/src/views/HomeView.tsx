@@ -51,6 +51,21 @@ export default function HomeView() {
     });
   }
 
+  const downloadInvoice = async (invoiceId: string) => {
+    const invoiceService = new InvoiceService();
+    await invoiceService.downloadInvoice(invoiceId);
+  }
+
+  const sendEmail = async (invoiceId: string, emails: string[]) => {
+    const invoiceService = new InvoiceService();
+    const response = await invoiceService.sendInvoice(invoiceId, emails);
+    if (response instanceof Error) toast.error('Falha ao enviar os e-mails. Cheque se não há nenhum e-mail inválido')
+    else {
+      toast.success('E-mails enviados com sucesso');
+      setShowSendInvoiceModal(null);
+    }
+  }
+
   const renderHeader = () => {
     return (
       <div className="lg:flex lg:items-center lg:justify-between">
@@ -75,16 +90,6 @@ export default function HomeView() {
         </div>
       </div>
     )
-  }
-
-  const downloadInvoice = async (invoiceId: string) => {
-    const invoiceService = new InvoiceService();
-    await invoiceService.downloadInvoice(invoiceId);
-  }
-
-  const sendEmail = async (invoiceId: string, emails: string[]) => {
-    const invoiceService = new InvoiceService();
-    await invoiceService.sendInvoice(invoiceId, emails);
   }
 
   const renderSelectedInvoice = (listInvoice) => {
@@ -149,8 +154,8 @@ export default function HomeView() {
             <progress className="progress w-56"></progress>}
         </div>
       </div>
-      <InvoiceModal open={showCreateInvoiceModal} closeDialog={() => setShowCreateInvoiceModal(false)} onSave={createInvoice} />
-      <SendInvoiceModal open={!!showSendInvoiceModal} closeDialog={() => setShowSendInvoiceModal(null)} onSend={sendEmail} invoiceId={showSendInvoiceModal ?? ''} />
+      {showCreateInvoiceModal && <InvoiceModal open={showCreateInvoiceModal} closeDialog={() => setShowCreateInvoiceModal(false)} onSave={createInvoice} />}
+      {showSendInvoiceModal && <SendInvoiceModal open={!!showSendInvoiceModal} closeDialog={() => setShowSendInvoiceModal(null)} onSend={sendEmail} invoiceId={showSendInvoiceModal ?? ''} />}
     </>
 
   )

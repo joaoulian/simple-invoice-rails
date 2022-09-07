@@ -20,10 +20,8 @@ export class UserService {
     } catch (err) {
       localStorage.removeItem('token')
       if (axios.isAxiosError(err)) {
-        console.log('error message: ', err.message)
         throw new APIError(err.message)
       } else {
-        console.log('unexpected error: ', err)
         throw new APIError('An unexpected error occurred')
       }
     }
