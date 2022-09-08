@@ -1,6 +1,17 @@
 ### Documentation
 
 [Document](https://joaoulian.notion.site/Husky-Challenge-81339c7a1f5a430aaf8374c7bec2ff5d)
+[Backend README](https://github.com/joaoulian/husky-challenge/blob/main/api/README.md)
+[Frontend README](https://github.com/joaoulian/husky-challenge/blob/main/client/README.md)
+
+### Folder structure
+
+Root structure
+
+```
+├── client/                          - frontend code
+├── api/                             - backend code
+```
 
 ## Requirements:
 
