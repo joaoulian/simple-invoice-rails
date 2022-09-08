@@ -43,6 +43,15 @@ rails server
 
 The server will start in the port 5000 (http://localhost:5000)
 
+### Setup E-mail
+
+Add an application.yml file to /config with the following variables
+
+```yml
+GMAIL_USERNAME: <gmail_username>
+GMAIL_PASSOWRD: <gmail_app_password>
+```
+
 ### Tests
 
 Run tests
